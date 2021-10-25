@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <photos></photos>
+    <photos
+        :currentSelection="currentSelection"
+        :dropDownIsVisible="dropDownIsVisible"
+        :cameras="cameras"
+    ></photos>
   </div>
 </template>
 
@@ -13,9 +17,45 @@ export default {
   components: {
     Photos
   },
+  data() {
+    return {
+      currentSelection: 'FHAZ',
+      dropDownIsVisible: false,
+      cameras: [
+        {
+          id: 0,
+          name: 'FHAZ'
+        },
+        {
+          id: 1,
+          name: 'RHAZ'
+        },
+        {
+          id: 2,
+          name: 'MAST'
+        },
+        {
+          id: 3,
+          name: 'CHEMCAM'
+        },
+        {
+          id: 4,
+          name: 'MAHLI'
+        },
+        {
+          id: 5,
+          name: 'MARDI'
+        },
+        {
+          id: 6,
+          name: 'NAVCAM'
+        }
+      ]
+    }
+  },
   computed: mapGetters(["photos"]),
   methods: {
-    ...mapActions(["loadPhotos"]),
+    ...mapActions(["loadPhotos"])
   },
   async mounted() {
     await this.loadPhotos('FHAZ');
